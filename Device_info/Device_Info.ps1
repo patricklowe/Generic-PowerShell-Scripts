@@ -13,24 +13,23 @@ Write-Host "`nEnter Device IP: " -BackgroundColor Black -ForegroundColor Yellow 
 $DeviceID = Read-Host
 
 #---------------------------------------------------------------------------------------------------#
-Write-Host "Enter Device Password: " -BackgroundColor Black -ForegroundColor Yellow -nonewline
-$password = Read-Host -AsSecureString
 Write-Host "Enter Device Username: " -BackgroundColor Black -ForegroundColor Yellow -nonewline
-$username = Read-Host 
+$Username = Read-Host
+#	 Get password as masked input
+Write-Host "Enter Device Password: " -BackgroundColor Black -ForegroundColor Yellow -nonewline
+$Password = Read-Host | ConvertTo-SecureString -asPlainText -Force
 $credential = New-Object System.Management.Automation.PSCredential($username,$password)
 #---------------------------------------------------------------------------------------------------#
 #	Setup SQL Details
 Write-Host "Enter SQL Username: " -BackgroundColor Black -ForegroundColor Yellow -nonewline
 $Username = Read-Host
-Write-Host "Enter SQL Password: " -BackgroundColor Black -ForegroundColor Yellow -nonewline
 #	 Get password as masked input
+Write-Host "Enter SQL Password: " -BackgroundColor Black -ForegroundColor Yellow -nonewline
 $Password = Read-Host -AsSecureString
-#	 Convert to allow SQL to read password
-$Password =[Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($Password))
-#	SQL Server
+#	 Get Server Instance
 Write-Host "Enter SQL Server Instance: " -BackgroundColor Black -ForegroundColor Yellow -nonewline
 $ServerInstance = Read-Host
-#	 SQL Database
+#	Get SQL Database Name
 Write-Host "Enter SQL Database: " -BackgroundColor Black -ForegroundColor Yellow -nonewline
 $Database = Read-Host
 #---------------------------------------------------------------------------------------------------#

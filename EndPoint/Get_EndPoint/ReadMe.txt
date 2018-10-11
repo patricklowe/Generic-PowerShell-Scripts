@@ -1,0 +1,1 @@
+Used to check what server/load balancer devices in "AllMachines" are pointed to, then outputs each to Logs
